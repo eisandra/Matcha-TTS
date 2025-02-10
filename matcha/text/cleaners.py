@@ -25,7 +25,7 @@ critical_logger.setLevel(logging.CRITICAL)
 # now the phonemizer is not initialising at every call
 # Might be less flexible, but it is much-much faster
 global_phonemizer = phonemizer.backend.EspeakBackend(
-    language="en-us",
+    language="et",
     preserve_punctuation=True,
     with_stress=True,
     language_switch="remove-flags",
@@ -100,6 +100,14 @@ def transliteration_cleaners(text):
     text = lowercase(text)
     text = collapse_whitespace(text)
     return text
+
+def estonian_cleaners(text):
+    """Pipeline for Catalan text, including abbreviation expansion. + punctuation + stress"""
+    text = lowercase(text)
+    phonemes = global_phonemizer.phonemize([text], strip=True, njobs=1)[0]
+    phonemes = collapse_whitespace(phonemes)
+    #print(phonemes)
+    return phonemes
 
 
 def english_cleaners2(text):
