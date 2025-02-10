@@ -38,5 +38,8 @@ train-ljspeech: ## Train the model
 train-ljspeech-min: ## Train the model with minimum memory
 	python matcha/train.py experiment=ljspeech_min_memory
 
+train-peeter:
+	python matcha/train.py experiment=peeter --config-name peeter.yaml
+
 start_app: ## Start the app
 	python matcha/app.py
